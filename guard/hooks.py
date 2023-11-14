@@ -215,3 +215,9 @@ app_license = "MIT"
 # auth_hooks = [
 #	"guard.auth.validate"
 # ]
+
+fixtures = [
+    {"doctype": "Custom Field", 
+    "filters": [["module" , "in" , ("Guard" )]]
+    }
+    ]

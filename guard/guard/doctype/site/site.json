@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:stite",
+ "creation": "2023-10-26 10:54:12.939650",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "stite",
+  "site_description",
+  "services",
+  "item_name",
+  "customer",
+  "column_break_19sos",
+  "post_code",
+  "site_address",
+  "contact_info_section",
+  "contact_no",
+  "trained_guard_required",
+  "sire_note",
+  "column_break_op00l",
+  "contact_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "stite",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Site",
+   "oldfieldname": "designation_name",
+   "oldfieldtype": "Data",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "site_description",
+   "fieldtype": "Data",
+   "label": "Site Description"
+  },
+  {
+   "description": "Select the services that will be displayed on the invoice",
+   "fieldname": "services",
+   "fieldtype": "Link",
+   "label": "Services",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_19sos",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "post_code",
+   "fieldtype": "Data",
+   "label": "Post Code"
+  },
+  {
+   "fieldname": "site_address",
+   "fieldtype": "Data",
+   "label": "Site Address"
+  },
+  {
+   "fieldname": "contact_info_section",
+   "fieldtype": "Section Break",
+   "label": "Contact Info"
+  },
+  {
+   "fieldname": "contact_no",
+   "fieldtype": "Data",
+   "label": "Contact No"
+  },
+  {
+   "default": "0",
+   "fieldname": "trained_guard_required",
+   "fieldtype": "Check",
+   "label": "Trained Guard Required"
+  },
+  {
+   "fieldname": "sire_note",
+   "fieldtype": "Data",
+   "label": "Site Note"
+  },
+  {
+   "fieldname": "column_break_op00l",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "label": "Contact Name"
+  },
+  {
+   "fetch_from": "services.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name"
+  }
+ ],
+ "icon": "fa fa-bookmark",
+ "links": [],
+ "modified": "2023-11-14 22:52:07.075413",
+ "modified_by": "Administrator",
+ "module": "Guard",
+ "name": "Site",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Sales User"
+  }
+ ],
+ "quick_entry": 1,
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "ASC",
+ "states": [],
+ "translated_doctype": 1
+}
