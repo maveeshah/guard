@@ -271,7 +271,6 @@
    "label": "Shift Start Time"
   },
   {
-   "fetch_from": "site.customer",
    "fieldname": "customer",
    "fieldtype": "Data",
    "label": "Customer"
@@ -393,7 +392,7 @@
  "icon": "fa fa-ok",
  "is_submittable": 1,
  "links": [],
- "modified": "2023-11-15 06:37:57.721488",
+ "modified": "2023-11-15 06:46:17.959507",
  "modified_by": "Administrator",
  "module": "Guard",
  "name": "Roster",
