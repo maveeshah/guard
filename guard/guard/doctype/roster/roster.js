@@ -11,6 +11,18 @@ frappe.ui.form.on('Roster', {
 					}
 				}				
 			}
-		})	
+		});
+
+	},
+	staff: function (frm) {
+		if (frm.doc.staff) {
+			if (frm.doc.staff == "Employee"){
+					frm.doc.subcontractor == ''
+			}
+			else if (frm.doc.staff == "Subcontractor"){
+				frm.doc.employee == ''
+		}
+		}
 	}
+
 });
