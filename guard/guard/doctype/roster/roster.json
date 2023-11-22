@@ -42,6 +42,7 @@
   "column_break_mx8aa",
   "shift_end_time",
   "site",
+  "item",
   "column_break_4quph",
   "hours",
   "roster_category",
@@ -388,12 +389,20 @@
    "options": "Roster",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fetch_from": "site.services",
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "read_only": 1
   }
  ],
  "icon": "fa fa-ok",
  "is_submittable": 1,
  "links": [],
- "modified": "2023-11-15 20:20:24.274552",
+ "modified": "2023-11-21 19:09:06.114541",
  "modified_by": "Administrator",
  "module": "Guard",
  "name": "Roster",
