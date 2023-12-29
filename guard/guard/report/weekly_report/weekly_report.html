@@ -1,0 +1,67 @@
+{%
+	var report_columns = report.get_columns_for_print();
+	report_columns = report_columns.filter(col => !col.hidden);
+
+	if (report_columns.length > 15) {
+		frappe.throw(__("Too many columns. Export the report and print it using a spreadsheet application."));
+	}
+
+	var concatenatedFilters = filters.site + " Timesheet for week " + filters.from_date + " - " + filters.to_date;
+
+%}
+
+<style>
+	.custom-report {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+	}
+
+	.custom-report th,
+	.custom-report td {
+		padding: 10px;
+		text-align: left;
+	}
+
+	.custom-report th {
+		background-color: #6967f1;
+        color: white;
+	}
+
+	.custom-report-blank-row td {
+		height: 37px;
+	}
+
+	.custom-report tr:nth-child(even) {
+		background-color: #f9f9f9;
+	}
+</style>
+
+<h2 class="text-center">{%= __(report.report_name) %}</h2>
+<h3 class="text-center">{%= __(concatenatedFilters) %}</h3>
+
+<hr>
+<table class="table table-bordered custom-report">
+	<thead>
+		<tr>
+			{% for col in report_columns %}
+				<th style="width: {%= 100 / report_columns.length %}%;">{%= col.label %}</th>
+			{% endfor %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in data %}
+			{%
+				var row_class = row.employee ? "" : "custom-report-blank-row";
+			%}
+			<tr class="{%= row_class %}">
+				{% for col in report_columns %}
+					<td>{%= frappe.format(row[col.fieldname], col, {}, row) %}</td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<p class="text-right text-muted">
+	Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
+</p>
