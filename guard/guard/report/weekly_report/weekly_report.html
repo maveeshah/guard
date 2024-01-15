@@ -5,52 +5,68 @@
 	if (report_columns.length > 15) {
 		frappe.throw(__("Too many columns. Export the report and print it using a spreadsheet application."));
 	}
-
-	var concatenatedFilters = filters.site + " Timesheet for week " + filters.from_date + " - " + filters.to_date;
-
+	var previous_site = null;
 %}
 
 <style>
-	.custom-report {
-		width: 100%;
-		border-collapse: collapse;
-		margin-top: 20px;
-	}
+    .custom-report {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        table-layout: fixed; /* Ensures the table respects the width of the columns */
+    }
 
-	.custom-report th,
-	.custom-report td {
-		padding: 10px;
-		text-align: left;
-	}
+    .custom-report th,
+    .custom-report td {
+        padding: 10px;
+        text-align: left;
+        word-wrap: break-word; /* This ensures that the text in each cell is broken nicely */
+    }
 
-	.custom-report th {
-		background-color: #6967f1;
+    .custom-report th {
+        background-color: #6967f1;
         color: white;
-	}
+    }
 
-	.custom-report-blank-row td {
-		height: 37px;
-	}
+    .custom-report-blank-row td {
+        height: 37px;
+    }
 
-	.custom-report tr:nth-child(even) {
-		background-color: #f9f9f9;
-	}
+    .custom-report tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
 </style>
 
-<h2 class="text-center">{%= __(report.report_name) %}</h2>
-<h3 class="text-center">{%= __(concatenatedFilters) %}</h3>
+{% for row in data %}
+	<table class="table table-bordered custom-report">
+	{%
+		if (row.site && row.site != previous_site) {
+			previous_site = row.site;
+	%}
+		
+		<div class="page-break"></div>
+		<br>
+		<h2 class="text-center">{%= __(report.report_name) %}</h2>
+		<h3 class="text-center">{%= __("Timesheet for week {0} - {1}", [filters.from_date, filters.to_date]) %} - {%= row.site %}</h3>
+		<hr>
+		
+		<thead>
+			<tr>
+				{% for col in report_columns %}
+					<th style="width: {%= 100 / report_columns.length %}%;">{%= col.label %}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+	{%
+		}
+	%}
 
-<hr>
-<table class="table table-bordered custom-report">
-	<thead>
-		<tr>
-			{% for col in report_columns %}
-				<th style="width: {%= 100 / report_columns.length %}%;">{%= col.label %}</th>
-			{% endfor %}
-		</tr>
-	</thead>
-	<tbody>
-		{% for row in data %}
+
+		<tbody>
 			{%
 				var row_class = row.employee ? "" : "custom-report-blank-row";
 			%}
@@ -59,9 +75,10 @@
 					<td>{%= frappe.format(row[col.fieldname], col, {}, row) %}</td>
 				{% endfor %}
 			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+		</tbody>
+	</table>
+{% endfor %}
+
 <p class="text-right text-muted">
 	Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
 </p>
