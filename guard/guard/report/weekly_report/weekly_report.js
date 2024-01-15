@@ -4,13 +4,13 @@
 
 frappe.query_reports["Weekly Report"] = {
 	"filters": [
-		{
-			fieldname: "site",
-			label: __("Site Name"),
-			fieldtype: "Link",
-			options: "Site",
-			reqd: 1,
-		},
+		// {
+		// 	fieldname: "site",
+		// 	label: __("Site Name"),
+		// 	fieldtype: "Link",
+		// 	options: "Site",
+		// 	reqd: 1,
+		// },
 		{
 			fieldname: "from_date",
 			label: __("From Date"),
