@@ -17,6 +17,7 @@ def get_columns():
 			"label": "Site Name",
 			"fieldtype": "Link",
 			"options": "Site",
+            "align": "left",
 			"width": 300
 		},
 		{
@@ -24,31 +25,36 @@ def get_columns():
 			"label": "Officer Name",
 			"fieldtype": "Link",
 			"options": "Employee",
+            "align": "left",
 			"width": 200
 		},
 		{
 			"fieldname": "attendance_date",
 			"label": "Date",
 			"fieldtype": "Date",
+            "align": "left",
 			"width": 200
 		},
 		{
 			"fieldname": "shift_start_time",
 			"label": "Start Time",
 			"fieldtype": "Time",
+            "align": "left",
 			"width": 155
 		},
 				{
 			"fieldname": "shift_end_time",
 			"label": "Finish Time",
 			"fieldtype": "Time",
+            "align": "left",
 			"width": 155
 		},
 		{
 			"fieldname": "hours",
 			"label": "Hours",
-			"fieldtype": "Float",
-			"width": 155
+			"fieldtype": "Int",
+			"width": 155,
+            "align": "left",
 		},
 
 	]
