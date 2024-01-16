@@ -103,10 +103,13 @@ def get_data(filters):
             (Roster.docstatus == docstatus_dict.get(filters.docstatus))
             & (Roster.attendance_date >= filters.from_date)
             & (Roster.attendance_date <= filters.to_date)
+            & (Roster.customer <= filters.customer)
         ).groupby(Roster.site)
     )
+    frappe.log_error(message=query, title="Weekly Report Query")
     # run the query and get the data in a variable
     sites = query.run(as_dict=1)
+    frappe.log_error(message=sites, title="Sites Data")
     
     # fetch roster data for each site
     site_data = []
