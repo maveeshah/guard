@@ -12,15 +12,15 @@
     .custom-report {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
-        table-layout: fixed; /* Ensures the table respects the width of the columns */
+		border-spacing: 0; 
+        table-layout: fixed;
     }
-
     .custom-report th,
     .custom-report td {
-        padding: 10px;
+		padding: 5px;
+		margin: 0;
         text-align: left;
-        word-wrap: break-word; /* This ensures that the text in each cell is broken nicely */
+        word-wrap: break-word;
     }
 
     .custom-report th {
@@ -36,13 +36,16 @@
         background-color: #f9f9f9;
     }
 
+	.custom-report td:last-child {
+    text-align: left;
+	}
     .page-break {
         page-break-after: always;
     }
 </style>
 
 {% for row in data %}
-	<table class="table table-bordered custom-report">
+	<table class="table table-borderless custom-report">
 	{%
 		if (row.site && row.site != previous_site) {
 			previous_site = row.site;
