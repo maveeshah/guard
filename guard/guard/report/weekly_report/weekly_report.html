@@ -17,7 +17,7 @@
     }
     .custom-report th,
     .custom-report td {
-		padding: 5px;
+		padding: 2px;
 		margin: 0;
         text-align: left;
         word-wrap: break-word;
@@ -28,8 +28,18 @@
         color: white;
     }
 
+	.custom-report th:nth-child(1),
+    .custom-report td:nth-child(1) {
+        width: 30%;
+    }
+
+    .custom-report th:nth-child(2),
+    .custom-report td:nth-child(2) {
+        width: 30%;
+    }
+
     .custom-report-blank-row td {
-        height: 37px;
+        height: 25px;
     }
 
     .custom-report tr:nth-child(even) {
