@@ -23,7 +23,11 @@
   "address",
   "amended_from",
   "timesheet_detail_section",
-  "details"
+  "details",
+  "section_break_h9dvs",
+  "total_hours",
+  "column_break_6p71o",
+  "total_amount"
  ],
  "fields": [
   {
@@ -123,12 +127,32 @@
    "fieldtype": "Table",
    "label": "Details",
    "options": "Employee Timesheet Detail"
+  },
+  {
+   "fieldname": "section_break_h9dvs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_hours",
+   "fieldtype": "Float",
+   "label": "Total hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_6p71o",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "Total Amount",
+   "read_only": 1
   }
  ],
  "icon": "fa fa-ok",
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-11 22:57:33.443241",
+ "modified": "2024-03-11 23:23:25.553223",
  "modified_by": "Administrator",
  "module": "Guard",
  "name": "Employee Time Sheet",
