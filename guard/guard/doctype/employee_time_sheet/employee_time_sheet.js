@@ -21,7 +21,7 @@ frappe.ui.form.on('Employee Timesheet Detail', {
 
 function updateAmount(frm, cdt, cdn) {
     const child_row = locals[cdt][cdn];
-    if (child_row.rate && child_row.hours) {
+    if (child_row.hours) {
         frappe.model.set_value(cdt, cdn, 'amount', child_row.hours * child_row.rate);
     }
     frm.refresh_field('details');
