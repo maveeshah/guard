@@ -1,0 +1,146 @@
+{%
+var report_columns = report.get_columns_for_print();
+report_columns = report_columns.filter(col => !col.hidden);
+
+if (report_columns.length > 15) {
+frappe.throw(__("Too many columns. Export the report and print it using a spreadsheet application."));
+}
+var previous_site = null;
+%}
+
+<style>
+    .total-row td {
+        font-weight: bold;
+    }
+
+    .custom-report {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .custom-report th,
+    .custom-report td {
+        padding: 1px;
+        font-size: 0.9em;
+        /* Slightly smaller font size */
+        text-align: left;
+        word-wrap: break-word;
+    }
+
+    .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 2px;
+        line-height: 0.428571;
+        vertical-align: top;
+    }
+
+    .custom-report th {
+        background-color: #6967f1 !important;
+        color: white;
+    }
+
+    .custom-report th:nth-child(1),
+    .custom-report td:nth-child(1) {
+        width: 30%;
+    }
+
+    .custom-report th:nth-child(2),
+    .custom-report td:nth-child(2) {
+        width: 30%;
+    }
+
+    .custom-report-blank-row td {
+        height: 15px;
+    }
+
+    .custom-report tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .custom-report td:last-child {
+        text-align: left;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
+
+    .custom-report td:last-child {
+        text-align: left;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
+
+    /* New styles for reducing height */
+    .custom-report td,
+    .custom-report th {
+        /* border: 1px solid #ddd; Lighter borders if needed */
+        line-height: 0.8;
+        /* Tighter line height */
+    }
+
+    .custom-report thead th {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+    .table {
+        font-size: inherit;
+        margin: 3px 0px;
+    }
+
+    .custom-report tbody tr {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        line-height: 0.8;
+    }
+
+    .custom-report tbody td {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+</style>
+
+
+
+<h3 class="text-center">{%= __("Timesheet Weekending {0} - {1}", [filters.from_date, filters.to_date]) %}</h3>
+<hr>
+
+<table class="table table-borderless custom-report">
+    <thead>
+        <tr>
+            {% for col in report_columns %}
+            <th>{%= col.label %}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        {% if row["site"] == "Total Hours" %}
+        <tr class="total-row" style="font-weight: bold;">
+            {% for col in report_columns %}
+            <td>{%= frappe.format(row[col.fieldname], col, {}, row) %}</td>
+            {% endfor %}
+        </tr>
+        {% else %}
+        <tr>
+            {% for col in report_columns %}
+            <td>{%= frappe.format(row[col.fieldname], col, {}, row) %}</td>
+            {% endfor %}
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+
+</table>
+
+<p class="text-right text-muted">
+    Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
+</p>
