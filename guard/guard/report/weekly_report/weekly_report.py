@@ -81,6 +81,7 @@ def get_site_data(site, filters):
             & (Roster.attendance_date >= filters.from_date)
             & (Roster.attendance_date <= filters.to_date)
             & (Roster.site == site)
+            & (Roster.customer == filters.customer)
         )
     )
     
